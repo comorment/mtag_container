@@ -10,8 +10,8 @@ on:
     tags:
       - "v*.*.*"
 env:
-  TEST_TAG: ghcr.io/precimed/container_template:test
-  # LATEST_TAG: ghcr.io/precimed/container_template:latest
+  TEST_TAG: ghcr.io/comorment/mtag_container:test
+  # LATEST_TAG: ghcr.io/comorment/mtag_container:latest
 
 jobs:
   docker:
@@ -25,7 +25,7 @@ jobs:
         with:
           # list of Docker images to use as base name for tags
           images: |
-            ghcr.io/${{ github.repository_owner }}/container_template            
+            ghcr.io/${{ github.repository_owner }}/mtag_container            
           # generate Docker tags based on the following events/attributes
           tags: |
             type=schedule
@@ -55,7 +55,7 @@ jobs:
           load: true
           tags: ${{ env.TEST_TAG }}
           file:
-            ./dockerfiles/container_template/Dockerfile
+            ./dockerfiles/mtag_container/Dockerfile
 
       - name: Run unit tests
         run: |
@@ -69,5 +69,5 @@ jobs:
           load: True
           tags: ${{ steps.meta.outputs.tags }}
           file:
-            ./dockerfiles/container_template/Dockerfile
+            ./dockerfiles/mtag_container/Dockerfile
           platforms: linux/amd64

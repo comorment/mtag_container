@@ -1,4 +1,4 @@
-name: container_template
+name: mtag_container
 channels:
   - conda-forge
   - defaults

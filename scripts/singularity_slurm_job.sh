@@ -13,9 +13,9 @@ module load $SINGULARITY_MODULE
 export ROOTDIR="$(dirname ${PWD})"
 export SINGULARITY_BIND="$ROOTDIR/reference:/REF:ro"  # mount reference directory as /REF
 export SIF=${ROOTDIR}/singularity
-export PYTHON="singularity exec --home=$PWD:/home --cleanenv $SIF/container_template.sif python"
+export PYTHON="singularity exec --home=$PWD:/home --cleanenv $SIF/mtag_container.sif python"
 
 # Run some commands
 $PYTHON --version  # print version
-$PYTHON -c "print('hello container_template')"  # run a command
+$PYTHON -c "print('hello mtag_container')"  # run a command
 $PYTHON hello_world.py # run a script
