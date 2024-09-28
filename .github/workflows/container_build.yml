@@ -11,7 +11,6 @@ on:
       - "v*.*.*"
 env:
   TEST_TAG: ghcr.io/comorment/mtag:test
-  # LATEST_TAG: ghcr.io/comorment/mtag:latest
 
 jobs:
   docker:
@@ -59,7 +58,8 @@ jobs:
 
       - name: Run unit tests
         run: |
-          docker run --rm -v ${{ github.workspace }}:/home ${{ env.TEST_TAG }} py.test -v tests
+          pip install -r test-requirements.txt
+          py.test -v tests
 
       - name: Build
         uses: docker/build-push-action@v6

@@ -53,7 +53,8 @@ jobs:
             ./dockerfiles/mtag/Dockerfile
       - name: Test
         run: |
-          docker run --rm -v ${{ github.workspace }}:/home ${{ env.TEST_TAG }} py.test -v tests
+          pip install -r test-requirements.txt
+          py.test -v tests
   
       - name: Build and push
         uses: docker/build-push-action@v6
