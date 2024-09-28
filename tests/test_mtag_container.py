@@ -31,13 +31,13 @@ except FileNotFoundError:
     try:
         out = subprocess.run('docker')
         pwd = os.getcwd()
-        MTAG = (f'docker run -p {port}:{port} ' +
+        MTAG = (f'docker run ' +
                   'ghcr.io/comorment/mtag')
-        PREFIX = (f'docker run -p {port}:{port} ' +
+        PREFIX = (f'docker run ' +
                   '--entrypoint python ' +
                   'ghcr.io/comorment/mtag')
         PREFIX_MOUNT = (
-            f'docker run -p {port}:{port} ' +
+            f'docker run ' +
             f'--mount type=bind,source={pwd},target={pwd} ' +
             '--entrypoint python ' +
             'ghcr.io/comorment/mtag')

@@ -10,7 +10,7 @@ on:
     tags:
       - "v*.*.*"
 env:
-  TEST_TAG: ghcr.io/comorment/mtag:test
+  TEST_TAG: ghcr.io/comorment/mtag:latest
 
 jobs:
   docker:
