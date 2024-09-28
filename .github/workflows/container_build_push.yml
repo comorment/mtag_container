@@ -6,7 +6,7 @@ on:
       - "v*.*.*"
 
 env:
-  TEST_TAG: ghcr.io/comorment/mtag_container:test
+  TEST_TAG: ghcr.io/comorment/mtag:test
 
 jobs:
   docker:
@@ -20,7 +20,7 @@ jobs:
         with:
           # list of Docker images to use as base name for tags
           images: |
-            ghcr.io/${{ github.repository_owner }}/mtag_container            
+            ghcr.io/${{ github.repository_owner }}/mtag            
           # generate Docker tags based on the following events/attributes
           tags: |
             type=schedule
@@ -50,7 +50,7 @@ jobs:
           load: true
           tags: ${{ env.TEST_TAG }}
           file:
-            ./dockerfiles/mtag_container/Dockerfile
+            ./dockerfiles/mtag/Dockerfile
       - name: Test
         run: |
           docker run --rm -v ${{ github.workspace }}:/home ${{ env.TEST_TAG }} py.test -v tests
@@ -63,7 +63,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           file:
-            ./dockerfiles/mtag_container/Dockerfile
+            ./dockerfiles/mtag/Dockerfile
           platforms: linux/amd64
 
   build-apptainer-container:
@@ -81,7 +81,7 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: |
-            ghcr.io/${{ github.repository_owner }}/mtag_container            
+            ghcr.io/${{ github.repository_owner }}/mtag            
           tags: |
             type=semver,pattern={{version}}
             type=ref,event=branch
@@ -94,10 +94,10 @@ jobs:
           IFS= read -r first_tag <<EOF
           $tags
           EOF
-          push_tags="$(printf $csv_tags | sed -e "s/mtag_container/mtag_container_sif/g")"
+          push_tags="$(printf $csv_tags | sed -e "s/mtag/mtag_sif/g")"
           echo ${{ secrets.GITHUB_TOKEN }} | oras login --username ${{ github.repository_owner }} --password-stdin ghcr.io
           docker pull kaczmarj/apptainer:latest
-          docker run --rm --privileged -v $(pwd):/work kaczmarj/apptainer build mtag_container.sif docker://"$first_tag"
-          oras push "$push_tags" mtag_container.sif
-          rm mtag_container.sif
+          docker run --rm --privileged -v $(pwd):/work kaczmarj/apptainer build mtag.sif docker://"$first_tag"
+          oras push "$push_tags" mtag.sif
+          rm mtag.sif
         shell: sh
