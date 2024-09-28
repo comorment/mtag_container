@@ -24,7 +24,7 @@ Revise the `<mtag_container>/.gitattributes` file as necessary. Some common file
 ## Build status
 
 [![License](http://img.shields.io/:license-GPLv3+-green.svg)](http://www.gnu.org/licenses/gpl-3.0.html)
-[![Documentation Status](https://readthedocs.org/projects/container-template/badge/?version=latest)](https://container-template.readthedocs.io/en/latest/?badge=latest)
+[![Documentation Status](https://readthedocs.org/projects/mtag_container/badge/?version=latest)](https://mtag_container.readthedocs.io/en/latest/?badge=latest)
 [![Flake8 lint](https://github.com/comorment/mtag_container/actions/workflows/python.yml/badge.svg)](https://github.com/comorment/mtag_container/actions/workflows/python.yml)
 [![Dockerfile lint](https://github.com/comorment/mtag_container/actions/workflows/docker.yml/badge.svg)](https://github.com/comorment/mtag_container/actions/workflows/docker.yml)
 [![Container build](https://github.com/comorment/mtag_container/actions/workflows/container_build.yml/badge.svg)](https://github.com/comorment/mtag_container/actions/workflows/container_build.yml)

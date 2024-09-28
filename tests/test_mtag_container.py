@@ -31,19 +31,20 @@ except FileNotFoundError:
     try:
         out = subprocess.run('docker')
         pwd = os.getcwd()
-        MTAG = (f'docker run ' +
+        MTAG = ('docker run ' +
                   'ghcr.io/comorment/mtag')
-        PREFIX = (f'docker run ' +
+        PREFIX = ('docker run ' +
                   '--entrypoint python ' +
                   'ghcr.io/comorment/mtag')
         PREFIX_MOUNT = (
-            f'docker run ' +
+            'docker run ' +
             f'--mount type=bind,source={pwd},target={pwd} ' +
             '--entrypoint python ' +
             'ghcr.io/comorment/mtag')
     except FileNotFoundError as err:
         # neither singularity nor docker found, fall back to plain python
-        raise err('Neither singularity nor docker found') from err
+        mssg = 'Neither singularity nor docker found, tests will fail'
+        raise FileNotFoundError(mssg) from err
         
 
 
