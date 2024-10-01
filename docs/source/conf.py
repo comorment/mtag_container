@@ -19,9 +19,9 @@ _release = _d['VERSION']
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'mtag_container'
-copyright = '2022, Espen Hagen, Bayram Cevdet Akdeniz, Alexander Frei'
-author = 'Espen Hagen, Bayram Cevdet Akdeniz, Alexander Frei'
+project = 'mtag container'
+copyright = '2022, Espen Hagen'
+author = 'Espen Hagen'
 release = _release
 
 # -- General configuration ---------------------------------------------------
