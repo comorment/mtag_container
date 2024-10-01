@@ -21,12 +21,20 @@ port = sock.getsockname()[1]
 # Check that (1) singularity exist, and (2) if not, check for docker.
 # If neither are found, tests will fall back to plain python.
 try:
-    pth = os.path.join('containers', 'mtag.sif')
-    out = subprocess.run('singularity')
+    pth = os.path.join('apptainer', 'mtag.sif')
+    try:
+        out = subprocess.run('singularity')
+        runtime = 'singularity'
+    except FileNotFoundError:
+        try:
+            out = subprocess.run('apptainer')
+            runtime = 'apptainer'
+        except FileNotFoundError:
+            raise FileNotFoundError
     cwd = os.getcwd()
-    MTAG = f'singularity run {pth}'
-    PREFIX = f'singularity run {pth} python'
-    PREFIX_MOUNT = f'singularity run --home={cwd}:/home/ {pth} python'
+    MTAG = f'{runtime} run {pth}'
+    PREFIX = f'{runtime} exec {pth} python'
+    PREFIX_MOUNT = f'{runtime} exec --home={cwd}:/home/ {pth} python'
 except FileNotFoundError:
     try:
         out = subprocess.run('docker')
@@ -43,7 +51,7 @@ except FileNotFoundError:
             'ghcr.io/comorment/mtag')
     except FileNotFoundError as err:
         # neither singularity nor docker found, fall back to plain python
-        mssg = 'Neither singularity nor docker found, tests will fail'
+        mssg = 'Neither singularity, apptainer nor docker found; tests fail'
         raise FileNotFoundError(mssg) from err
         
 
