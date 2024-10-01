@@ -1,6 +1,9 @@
-# mtag_container project
+# MTAG container project
 
-README info goes here. Modify for your own project's needs.
+This repository is for containerized mtag (Multi-Trait Analysis of GWAS) from [https://github.com/JonJala/mtag].
+
+mtag is a Python-based command line tool for jointly analyzing multiple sets of GWAS summary statistics as described by [Turley et. al. (2018)](https://www.nature.com/articles/s41588-017-0009-4). 
+It can also be used as a tool to meta-analyze GWAS results.
 
 # Important! - post initial setup steps
 
