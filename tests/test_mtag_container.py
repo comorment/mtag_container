@@ -21,12 +21,12 @@ port = sock.getsockname()[1]
 # Check that (1) singularity exist, and (2) if not, check for docker.
 # If neither are found, tests will fall back to plain python.
 try:
-    pth = os.path.join('containers', 'mtag.sif')
+    pth = os.path.join('apptainer', 'mtag.sif')
     out = subprocess.run('singularity')
     cwd = os.getcwd()
     MTAG = f'singularity run {pth}'
-    PREFIX = f'singularity run {pth} python'
-    PREFIX_MOUNT = f'singularity run --home={cwd}:/home/ {pth} python'
+    PREFIX = f'singularity exec {pth} python'
+    PREFIX_MOUNT = f'singularity exec --home={cwd}:/home/ {pth} python'
 except FileNotFoundError:
     try:
         out = subprocess.run('docker')
