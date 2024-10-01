@@ -9,11 +9,9 @@ RUN conda install -c forge \
     git==2.32.0
 
 WORKDIR /
-RUN git clone --depth 1 https://github.com/JonJala/mtag.git && \
-    cd mtag && \
-    git reset --hard 9e17f3cf1fbcf57b6bc466daefdc51fd0de3c5dc && \
-    rm -rf .git
-
+RUN git clone --depth 1 https://github.com/JonJala/mtag.git
 WORKDIR /mtag
+RUN git reset --hard 9e17f3cf1fbcf57b6bc466daefdc51fd0de3c5dc && \
+    rm -rf .git
 
 ENTRYPOINT ["/opt/conda/bin/python", "mtag.py"]
