@@ -1,0 +1,9 @@
+Bootstrap: docker
+From: {{ mtag_image }}
+
+%post
+
+%environment
+
+%runscript
+    exec /opt/conda/bin/python /mtag/mtag.py "$@"

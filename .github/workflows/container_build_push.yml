@@ -23,12 +23,9 @@ jobs:
             ghcr.io/${{ github.repository_owner }}/mtag            
           # generate Docker tags based on the following events/attributes
           tags: |
-            type=schedule
             type=ref,event=branch
-            type=ref,event=pr
             type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=semver,pattern={{major}}
+            type=pep440,pattern={{version}}
             type=sha
             type=raw,value=latest,enable={{is_default_branch}} 
       - name: Set up QEMU
@@ -98,7 +95,8 @@ jobs:
           push_tags="$(printf $csv_tags | sed -e "s/mtag/mtag_sif/g")"
           echo ${{ secrets.GITHUB_TOKEN }} | oras login --username ${{ github.repository_owner }} --password-stdin ghcr.io
           docker pull kaczmarj/apptainer:latest
-          docker run --rm --privileged -v $(pwd):/work kaczmarj/apptainer build mtag.sif docker://"$first_tag"
+          # docker run --rm --privileged -v $(pwd):/work kaczmarj/apptainer build mtag.sif docker://"$first_tag"
+          docker run --rm --privileged -v $(pwd):/work kaczmarj/apptainer build -F --build-arg mtag_image="$first_tag" mtag.sif apptainer/mtag.def
           oras push "$push_tags" mtag.sif
           rm mtag.sif
         shell: sh
