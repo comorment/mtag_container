@@ -74,6 +74,10 @@ jobs:
     steps:
       - name: Check out code for the container builds
         uses: actions/checkout@v4
+      - name: Setup Apptainer
+        uses: eWaterCycle/setup-apptainer@v2
+        with:
+          apptainer-version: 1.3.4
       - name: Docker meta 
         id: meta
         uses: docker/metadata-action@v5
@@ -96,7 +100,7 @@ jobs:
           echo ${{ secrets.GITHUB_TOKEN }} | oras login --username ${{ github.repository_owner }} --password-stdin ghcr.io
           docker pull kaczmarj/apptainer:latest
           # docker run --rm --privileged -v $(pwd):/work kaczmarj/apptainer build mtag.sif docker://"$first_tag"
-          docker run --rm --privileged -v $(pwd):/work kaczmarj/apptainer build -F --build-arg mtag_image="$first_tag" mtag.sif apptainer/mtag.def
+          apptainer build -F --build-arg mtag_image="$first_tag" mtag.sif apptainer/mtag.def
           oras push "$push_tags" mtag.sif
           rm mtag.sif
         shell: sh
