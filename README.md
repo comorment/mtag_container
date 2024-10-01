@@ -129,6 +129,7 @@ tar --exclude=".git/*" -cvf mtag_container_$SHA.tar mtag_container
 | ubuntu              | 24.04                 | [Creative Commons CC-BY-SA version 3.0 UK licence](https://ubuntu.com/legal/intellectual-property-policy) | [Ubuntu.com](https://ubuntu.com)
 | miniconda           | 4.7.12                | [BSD-3-Clause](https://docs.conda.io/en/latest/license.html) | [Miniconda](https://docs.anaconda.com/miniconda/)
 | python              | 2.7.16                | [PSF](https://docs.python.org/2.7/license.html) | [Python.org](https://www.python.org)
+| mtag                | 9e17f3cf              | [GPL-3](https://github.com/JonJala/mtag/blob/master/LICENSE) | [mtag](https://github.com/JonJala/mtag)
 
 ## Building/rebuilding containers
 
